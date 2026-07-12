@@ -6,4 +6,4 @@ resources:
   - service.yaml
 images:
   - name: shiladitya997/fastapi_basic_app
-    newTag: b854170e518bc9fbac22a10f10ef4066f8352182
+    newTag: 8c5e9ad2c106110940a09f8d11218d81ed5be4c8

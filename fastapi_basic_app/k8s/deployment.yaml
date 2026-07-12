@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-basic-app
+  labels:
+    app: fastapi-basic-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fastapi-basic-app
+  template:
+    metadata:
+      labels:
+        app: fastapi-basic-app
+    spec:
+      containers:
+        - name: fastapi-basic-app
+          image: shiladitya997/fastapi_basic_app
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: fastapi-basic-app-config
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
